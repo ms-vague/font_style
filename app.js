@@ -15,12 +15,16 @@ $(function(){
         //alert('Test Submit Button');
         var results = '<li>' + 'No results. Try Again.' + '</li>';
 
-        if (data.Search) {
-            console.log(data);
+        var getItems = data.items;
+        console.log(getItems);
+
+        /*if (data.Search) {
+            //console.log(data);
             results = data.Search.map(function(item){
-                return '<li>' + item + '</li>';
+                return '<li>' + item.items + '</li>';
             });
-        }
+        } */
+
         $('.fonts').html(results);
     }
 
