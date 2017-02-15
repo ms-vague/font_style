@@ -18,8 +18,14 @@ $(function(){
         //console.log(data);//
         var getItems = data.items;
         //console.log(getItems);//
+
         for (var i = 0; i < getItems.length; i++) {
-            console.log(getItems[i]);
+            //console.log(getItems[i]['category']);//
+            var eachItemCat = getItems[i]['category'];
+            console.log(eachItemCat);
+            if (eachItemCat) {
+                return results = '<li>' + eachItemCat + '</li>';
+            }
         }
 
         $('.fonts').html(results);
