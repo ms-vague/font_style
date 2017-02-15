@@ -17,6 +17,12 @@ $(function(){
 
         //console.log(data);
         console.log(data.items.splice(0, 99));
+        if (data.items) {
+            firstItems = data.items.splice(0, 99) 
+            results = firstItems.map(function(item){
+                return '<li>' + item.family + '</li>';
+            })
+        }
 
         /*if (data.Search) {
             //console.log(data);
