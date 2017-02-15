@@ -1,0 +1,16 @@
+* {
+	box-sizing: border-box;
+}
+
+header, form, ul {
+	text-align: center;
+	padding: 50px;
+}
+
+header {
+	font-size: xx-large;
+}
+
+ul {
+	list-style: none;
+}
