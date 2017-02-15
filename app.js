@@ -13,24 +13,14 @@ $(function(){
 
     function renderSearchData(data){
         //alert('Test Submit Button');
-        var results = '<li>' + 'No results. Try Again.' + '</li>';
+        var results = '<li>' + 'No results. Try Again.' + '</li>'
 
-        //console.log(data);
-        //console.log(data.items.splice(0, 99));
-        /*if (data.items) {
-            firstItems = data.items.splice(0, 70); 
-            results = firstItems.map(function(item){
-                return '<li>' + item.family + '</li>';
-            })
-        }*/
-        
-        searchData = data.items.splice(0, 99);
-        if (searchData) {
-            //console.log(data);
-            results = searchData.map(function(item){
-                return '<li>' + item.family + '</li>';
-            });
-        } 
+        //console.log(data);//
+        var getItems = data.items;
+        //console.log(getItems);//
+        for (var i = 0; i < getItems.length; i++) {
+            console.log(getItems[i]);
+        }
 
         $('.fonts').html(results);
     }
