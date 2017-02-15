@@ -22,7 +22,7 @@ $(function(){
         for (var i = 0; i < getItems.length; i++) {
             //console.log(getItems[i]['category']);//
             var eachItemCat = getItems[i]['category'];
-            console.log(eachItemCat);
+            //console.log(eachItemCat);//
             if (eachItemCat) {
                 return results = '<li>' + eachItemCat + '</li>';
             }
