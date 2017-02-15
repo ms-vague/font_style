@@ -16,20 +16,21 @@ $(function(){
         var results = '<li>' + 'No results. Try Again.' + '</li>';
 
         //console.log(data);
-        console.log(data.items.splice(0, 99));
-        if (data.items) {
-            firstItems = data.items.splice(0, 99) 
+        //console.log(data.items.splice(0, 99));
+        /*if (data.items) {
+            firstItems = data.items.splice(0, 70); 
             results = firstItems.map(function(item){
                 return '<li>' + item.family + '</li>';
             })
-        }
-
-        /*if (data.Search) {
+        }*/
+        
+        searchData = data.items.splice(0, 99);
+        if (searchData) {
             //console.log(data);
-            results = data.Search.map(function(item){
-                return '<li>' + item.items + '</li>';
+            results = searchData.map(function(item){
+                return '<li>' + item.family + '</li>';
             });
-        } */
+        } 
 
         $('.fonts').html(results);
     }
