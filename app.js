@@ -15,8 +15,8 @@ $(function(){
         //alert('Test Submit Button');
         var results = '<li>' + 'No results. Try Again.' + '</li>';
 
-        var getItems = data.items;
-        console.log(getItems);
+        //console.log(data);
+        console.log(data.items.splice(0, 99));
 
         /*if (data.Search) {
             //console.log(data);
