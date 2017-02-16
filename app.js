@@ -22,10 +22,13 @@ $(function(){
         for (var i = 0; i < getItems.length; i++) {
             //console.log(getItems[i]['category']);//
             var eachItemCat = getItems[i]['category'];
-            //console.log(eachItemCat);//
-            if (eachItemCat) {
-                return results = '<li>' + eachItemCat + '</li>';
-            }
+            var eachItemFam = getItems[i]['family'];
+            var eachItemVariant = getItems[i]['variants'];
+            var eachItemFile = getItems[i]['files'].regular;
+            console.log(eachItemCat);
+            console.log(eachItemFam);
+            console.log(eachItemVariant);
+            console.log(eachItemFile);
         }
 
         $('.fonts').html(results);
@@ -34,7 +37,7 @@ $(function(){
     function submit(){
         $('form').submit(function(event){
             event.preventDefault();
-            var searchTerm = $('.query_search').val();
+            var searchTerm = $(this).find('.query_search').val();
             getData(searchTerm, renderSearchData);
         });
     }
