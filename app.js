@@ -18,19 +18,15 @@ $(function(){
         //console.log(data);//
         var getItems = data.items;
         //console.log(getItems);//
-
         for (var i = 0; i < getItems.length; i++) {
             //console.log(getItems[i]['category']);//
             var eachItemCat = getItems[i]['category'];
             var eachItemFam = getItems[i]['family'];
-            var eachItemVariant = getItems[i]['variants'];
             var eachItemFile = getItems[i]['files'].regular;
-            console.log(eachItemCat);
-            console.log(eachItemFam);
-            console.log(eachItemVariant);
-            console.log(eachItemFile);
+            //console.log(eachItemCat);//
+            //console.log(eachItemFam);//
+            //console.log(eachItemFile);//
         }
-
         $('.fonts').html(results);
     }
 
