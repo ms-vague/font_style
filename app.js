@@ -13,7 +13,7 @@ $(function(){
 
     function renderSearchData(data){
         //alert('Test Submit Button');
-        var results = '<li>' + 'No results. Try Again.' + '</li>'
+        var results = '<li>' + 'No results. Try Again.' + '</li>';
 
         //console.log(data);//
         var getItems = data.items;
@@ -23,9 +23,11 @@ $(function(){
             var eachItemCat = getItems[i]['category'];
             var eachItemFam = getItems[i]['family'];
             var eachItemFile = getItems[i]['files'].regular;
-            //console.log(eachItemCat);//
-            //console.log(eachItemFam);//
-            //console.log(eachItemFile);//
+            console.log(eachItemCat);
+            console.log(eachItemFam);
+            console.log(eachItemFile);
+
+            
         }
         $('.fonts').html(results);
     }
