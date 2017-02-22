@@ -4,8 +4,7 @@ $(function(){
 
     function getData(searchTerm, callback){
         var query = {
-            s: searchTerm,  
-            r: 'json'
+            sort: 'popularity'
         }
         $.getJSON(googleFontUrl, query, callback);
 
