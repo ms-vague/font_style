@@ -42,3 +42,10 @@ $(function(){
     submit();
 
 });
+
+$(document).ready(function(){
+     $('.foo, .bar').css({
+        fontsize: '600px',
+        color: 'red'
+    });
+});
