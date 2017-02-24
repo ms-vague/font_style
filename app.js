@@ -49,3 +49,26 @@ $(document).ready(function(){
         color: 'red'
     });
 });
+
+let WebFontConfig = {
+    google: { 
+        families: ['Pangolin'] 
+    },
+    timeout: 2000 /* font request abadoned if longer than 2 seconds */
+};
+
+(function(){
+    let wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.async = 'true';
+    document.head.appendChild(wf);
+})();
+
+document.getElementById('switch-button').addEventListener('click', function () {
+    if (document.documentElement.className.indexOf('wf-active') > -1) {
+        document.documentElement.className = '';
+    } else {
+        document.documentElement.className = 'wf-active';
+    }
+});
