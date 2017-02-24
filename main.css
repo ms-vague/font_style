@@ -11,6 +11,20 @@ header {
 	font-size: xx-large;
 }
 
-ul {
-	list-style: none;
+p {
+    font-family: Georgia, Times, Times New Roman, serif;
+    font-size: 15px;
+    line-height: 1.1;
+    word-spacing: 1px;
+}
+
+.wf-active h1 {
+    color: green;
+}
+
+.wf-active p {
+    font-family:'Potano Sans';
+    font-size: 16px;
+    line-height: 1;
+    word-spacing: 2.5px;
 }
