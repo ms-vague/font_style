@@ -23,12 +23,24 @@
             	 // will show on page with download link under display //
                  // use font name in header with lorem <p> for font pair // -->
 
-  		<div class='search_results'>
-  			<ul class='fonts'>
-  			</ul>
-  		</div>
+  		<div>
+			<div class='foo'>
+				<h2>Testing</h2>
+			</div>	
+			<div class='bar'>
+				<p>Testing</p>
+			</div>
+		</div>
 
 	</main>
+
+	<script>
+  		WebFontConfig = {
+    		google: {
+      		families: ['serif', 'sans-serif', 'handwriting', 'display', 'monospace']
+    		}
+  		};
+	</script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js'></script>
 	<script src='app.js'></script>
 </body>
