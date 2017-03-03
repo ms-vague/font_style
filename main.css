@@ -2,15 +2,26 @@
 	box-sizing: border-box;
 }
 
-header, form, ul {
+header {
+	font-family: serif, sans-serif;
+	font-size: xx-large;
 	text-align: center;
 	padding: 50px;
 }
 
-header {
-	font-size: xx-large;
+p {
+    font-family: Georgia, Times, serif;
+    font-size: 16px;
+    line-height: 1.1;
+    word-spacing: 1px;
 }
 
-ul {
-	list-style: none;
+.font_pair {
+	text-align: center;
 }
+
+/*
+
+add responsive design CSS elements here
+
+*/

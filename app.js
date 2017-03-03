@@ -2,18 +2,25 @@ $(function(){
 
     var googleFontUrl = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBxzFarVQQ7DZrN8SDz4wMuikwd4Abx51w';
 
-    function getData(searchTerm, callback){
+    function getData(){
         var query = {
             sort: 'popularity'
         }
-        $.getJSON(googleFontUrl, query, callback);
-
+        $.getJSON(googleFontUrl, query);
     }
 
     function renderSearchData(data){
         //alert('Test Submit Button');
-        var results = '<li>' + 'No results. Try Again.' + '</li>';
-
+        
+        // nest this function with line 61 function //        
+        // developer.telerik //
+        // google: { [] } family will be a variable //
+        /* var WebFontConfig = {
+            google: { 
+                var FontFamilies = [];  
+            },
+            timeout: 2000 // font request abadoned if longer than 2 seconds //
+        }; */
         //console.log(data);//
         var getItems = data.items;
         //console.log(getItems);//
@@ -24,28 +31,57 @@ $(function(){
             var eachItemFile = getItems[i]['files'].regular;
             console.log(eachItemCat);
             console.log(eachItemFam);
-            console.log(eachItemFile);
-            
+            console.log(eachItemFile);            
         }
-        $('.fonts').html(results);
+        $('.font_pair').html(results);
     }
 
     function submit(){
-        $('form').submit(function(event){
+        $('switch_button').submit(function(event){
             event.preventDefault();
-            var searchTerm = $(this).find('.query_search').val();
-            getData(searchTerm, renderSearchData);
+            getData(renderSearchData);
         });
     }
-
     submit();
-
 });
 
+/* // CSS jQUERY //
 $(document).ready(function(){
      $('.foo, .bar').css({
-        fontsize: '600px',
+        fontsize: '200px',
         color: 'red'
     });
 });
 
+// developer.telerik //
+
+// asynchronous approach //
+ webFont.load({
+    google: {
+        families: []
+    }
+});
+
+var WebFontConfig = {
+    google: { 
+        families: eachItemFam
+    },
+    timeout: 2000 // font request abadoned if longer than 2 seconds //
+}; 
+
+(function(){
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.async = 'true';
+    document.head.appendChild(wf);
+})();
+
+// vanilla JS //
+document.getElementById('switch-button').addEventListener('click', function () {
+    if (document.documentElement.className.indexOf('wf-active') > -1) {
+        document.documentElement.className = '';
+    } else {
+        document.documentElement.className = 'wf-active';
+    }
+}); */
