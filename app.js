@@ -1,16 +1,43 @@
 $(function(){
+    //console.log(WebFont);//
+
+    WebFont.load({
+        google: {
+            families: ['Droid Sans', 'Droid Serif']
+        }
+    });
 
     var googleFontUrl = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBxzFarVQQ7DZrN8SDz4wMuikwd4Abx51w';
 
-    function getData(){
+    $.getJSON(googleFontUrl, function(data) {
+        var getArray = data.items;
+        // console.log(getArray);
+        for (var i = 0; i < getArray.length; i++) {
+            var getFamilies = getArray[i]['family'];
+            var getFiles = getArray[i]['files'];
+            // console.log(getFiles);
+        }
+    });
+    $('.switch_button').click(function(){
+        //alert('Fuck me! It works!');//
+        $('h1').css('font-family', 'Droid Serif');
+        $('p').css('font-family', 'Droid Sans');
+    });
+
+});
+
+    
+
+
+    /* function renderSearchData(data){
+        //alert('Test Submit Button');
+
+        function getData(){
         var query = {
             sort: 'popularity'
         }
         $.getJSON(googleFontUrl, query);
     }
-
-    function renderSearchData(data){
-        //alert('Test Submit Button');
         
         // nest this function with line 61 function //        
         // developer.telerik //
@@ -20,7 +47,7 @@ $(function(){
                 var FontFamilies = [];  
             },
             timeout: 2000 // font request abadoned if longer than 2 seconds //
-        }; */
+        }; 
         //console.log(data);//
         var getItems = data.items;
         //console.log(getItems);//
@@ -42,8 +69,11 @@ $(function(){
             getData(renderSearchData);
         });
     }
+
     submit();
 });
+
+
 
 /* // CSS jQUERY //
 $(document).ready(function(){
