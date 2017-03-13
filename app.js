@@ -1,7 +1,11 @@
 $(function(){
     //console.log(WebFont);//
 
-    
+    /*WebFont.load({
+        google: {
+            families: [] // not working //
+        }
+    });*/
 
     var googleFontUrl = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBxzFarVQQ7DZrN8SDz4wMuikwd4Abx51w';
 
@@ -11,19 +15,20 @@ $(function(){
         for (var i = 0; i < getArray.length; i++) {
             var getFamilies = getArray[i]['family'];
             var getFiles = getArray[i]['files'];
-            // console.log(getFamilies);
+            //console.log(getFiles);
             // console.log(getFiles);
-            WebFont.load({
+            WebFontConfig = {
                 google: {
-                    families: [getFamilies] // not working //
+                    families: [] // not working //
             }
-    });
+        }
+        var pushFamilies = WebFontConfig.google.families.push(getFamilies);
         }
     });
     $('.switch_button').click(function(){
         //alert('Fuck me! It works!');//
-        $('h1').css('font-family', 'getFamlies'); // getFamlies not working //
-        $('p').css('font-family', 'getFamilies'); // getFamilies not working //
+        $('h1').css('font-family', 'pushFamilies'); // getFamlies not working //
+        $('p').css('font-family', 'pushFamilies'); // getFamilies not working //
     });
 
 });
