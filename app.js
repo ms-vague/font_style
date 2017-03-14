@@ -1,12 +1,6 @@
 $(function(){
     //console.log(WebFont);//
 
-    /*WebFont.load({
-        google: {
-            families: [] // not working //
-        }
-    });*/
-
     var googleFontUrl = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBxzFarVQQ7DZrN8SDz4wMuikwd4Abx51w';
 
     $.getJSON(googleFontUrl, function(data) {
@@ -15,20 +9,22 @@ $(function(){
         for (var i = 0; i < getArray.length; i++) {
             var getFamilies = getArray[i]['family'];
             var getFiles = getArray[i]['files'];
-            //console.log(getFiles);
+            // console.log(getFamilies);
             // console.log(getFiles);
-            WebFontConfig = {
+            WebFont.load({
                 google: {
-                    families: [] // not working //
-            }
-        }
-        var pushFamilies = WebFontConfig.google.families.push(getFamilies);
+                    families: ['Diplomata SC', 'Lato'] // not working //
+                }
+            });        
+        //var pushFamilies = WebFont.google.families.push(getFamilies);//
+        //var randomFamily = Math.floor(Math.random()*getFamilies.length);//
+        //console.log(pushFamilies);//
         }
     });
-    $('.switch_button').click(function(){
+    $('.switch_button_one').click(function(){
         //alert('Fuck me! It works!');//
-        $('h1').css('font-family', 'pushFamilies'); // getFamlies not working //
-        $('p').css('font-family', 'pushFamilies'); // getFamilies not working //
+        $('.title_one').css('font-family', 'Diplomata SC'); // getFamlies not working //
+        $('.paragraph_one').css('font-family', 'Lato'); // getFamilies not working //
     });
 
 });
