@@ -9,15 +9,13 @@ header {
 	padding: 50px;
 }
 
-p {
-    font-family: Georgia, Times, serif;
-    font-size: 16px;
-    line-height: 1.1;
-    word-spacing: 1px;
-}
-
-.font_pair {
+.font_pair_one, .font_pair_two, .font_pair_three, .font_pair_four {
+	display: inline-block;
+	margin: 25px 125px 25px 150px; /* top right bottom left   */
 	text-align: center;
+	border: 3px solid black;
+	border-radius: 15px;
+	padding: 15px;
 }
 
 /*
