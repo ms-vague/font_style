@@ -18,7 +18,7 @@ $(function(){
             families: fontsArray
         },
         fontloading: function(familyName, fvd) {
-            console.log(familyName);
+            console.log(familyName, fvd);
         }
     }    
     WebFont.load(WebFontConfig);  
