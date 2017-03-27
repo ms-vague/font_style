@@ -13,30 +13,37 @@ $(function(){
         //console.log(typeof fontsArray);    
         //console.log(typeof joined); 
 
-    var randomFont = fontsArray[Math.floor(Math.random() * fontsArray.length)];
-    console.log(randomFont);     
+    
+    //console.log(oneFont);     
 
     var WebFontConfig = {
         google: {
-            families: randomFont
+            families: getRandomFont(fontsArray)   // one random font array 
         },
-        fontloading: function(familyName, fvd) {
+        fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
             //console.log(familyName);
-            switchButtons(familyName);
+            switchStyle(familyName);
         }
     }
-    WebFont.load(WebFontConfig);  
+    $('.switch_button_one').click(function() {
+        WebFont.load(WebFontConfig);
+    });  
     });
 
-    var buttons = $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four');
-    var titles = $('.title_one, .title_two, .title_three, .title_four');
-    var paragraphs = $('.paragraph_one, .paragraph_two, .paragraph_three, .paragraph_four');
+    /*var buttons = $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four');*/
+    /*var titles = $('.title_one, .title_two, .title_three, .title_four');*/
+    /*var paragraphs = $('.paragraph_one, .paragraph_two, .paragraph_three, .paragraph_four');*/
 
-    function switchButtons(font){
-        $(buttons).click(function(){ 
-            //alert('Works!'); 
-            $(titles).css('font-family', font);
-            $(paragraphs).css('font-family', font);
-        });
+    function getRandomFont(fontArray) {
+        var min = 1;
+        var max = fontArray.length;
+        var randomFont = fontArray[Math.floor(Math.random() * (max - min + 1)) + min];
+        //console.log(randomFont);
+        return randomFont;
+    }
+
+    function switchStyle(font){
+        $('.title_one').css('font-family', font);
+        /* add the rest of CSS stuff here */
     }
 });
