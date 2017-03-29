@@ -25,9 +25,9 @@ $(function(){
             switchStyle(familyName);
         }
     }
-    $('.switch_button_one').click(function() {
+    $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four').click(function() {
         WebFont.load(WebFontConfig);
-    });  
+        });  
     });
 
     /*var buttons = $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four');*/
@@ -35,15 +35,23 @@ $(function(){
     /*var paragraphs = $('.paragraph_one, .paragraph_two, .paragraph_three, .paragraph_four');*/
 
     function getRandomFont(fontArray) {
+        //console.log(fontArray);
         var min = 1;
         var max = fontArray.length;
-        var randomFont = fontArray[Math.floor(Math.random() * (max - min + 1)) + min];
+        var randomFont = [];
+        randomFont.push(fontArray[Math.floor(Math.random() * (max - min + 1)) + min]);
         //console.log(randomFont);
         return randomFont;
     }
 
     function switchStyle(font){
         $('.title_one').css('font-family', font);
-        /* add the rest of CSS stuff here */
+        $('.paragraph_one').css('font-family', font);
+        $('.title_two').css('font-family', font);
+        $('.paragraph_two').css('font-family', font);
+        $('.title_three').css('font-family', font);
+        $('.paragraph_three').css('font-family', font);
+        $('.title_four').css('font-family', font);
+        $('.paragraph_four').css('font-family', font);
     }
 });
