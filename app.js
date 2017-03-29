@@ -24,10 +24,12 @@ $(function(){
             //console.log(familyName);
             switchStyle(familyName);
         }
-    }
-    $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four').click(function() {
+    } // try this function: if button is clicked --> change font
+    $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four').click(function() { 
+        $(this).data('clicked', true);
         WebFont.load(WebFontConfig);
-        });  
+        //alert('clicked!');//
+        });
     });
 
     /*var buttons = $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four');*/
@@ -45,13 +47,21 @@ $(function(){
     }
 
     function switchStyle(font){
-        $('.title_one').css('font-family', font);
-        $('.paragraph_one').css('font-family', font);
-        $('.title_two').css('font-family', font);
-        $('.paragraph_two').css('font-family', font);
-        $('.title_three').css('font-family', font);
-        $('.paragraph_three').css('font-family', font);
-        $('.title_four').css('font-family', font);
-        $('.paragraph_four').css('font-family', font);
+      if ($('.switch_button_one').data('clicked')) {
+           $('.title_one').css('font-family', font);
+           $('.paragraph_one').css('font-family', font);
+         }
+      if ($('.switch_button_two').data('clicked')) {
+           $('.title_two').css('font-family', font);
+           $('.paragraph_two').css('font-family', font);
+      }
+      if ($('.switch_button_three').data('clicked')) {
+           $('.title_three').css('font-family', font);
+           $('.paragraph_three').css('font-family', font);
+      }
+      if ($('.switch_button_four').data('clicked')) {
+           $('.title_four').css('font-family', font);
+           $('.paragraph_four').css('font-family', font);
+      }
     }
 });
