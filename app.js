@@ -15,22 +15,25 @@ $(function(){
 
     
     //console.log(oneFont);     
-
-    var WebFontConfig = {
-        google: {
-            families: getRandomFont(fontsArray)   // one random font array 
-        },
-        fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
-            //console.log(familyName);
-            switchStyle(familyName);
+    function makeWebFontConfig() { 
+        return {
+            google: {
+                families: getRandomFont(fontsArray)   // one random font array 
+            },
+            fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
+                //console.log(familyName);
+                switchTitleStyle(familyName);
+                /*switchParagraphStyle(familyName);*/
+            }
         }
-    }
-    $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four').click(function() {
-        WebFont.load(WebFontConfig);
-        });  
+    } 
+     $('.switch_title_one, .switch_title_two, .switch_title_three, .switch_title_four').click(function() { 
+        $(this).data('clicked', true);
+        WebFont.load(makeWebFontConfig());
+        });
     });
 
-    /*var buttons = $('.switch_button_one, .switch_button_two, .switch_button_three, .switch_button_four');*/
+    /*var buttons = $('.switch_title_one, .switch_title_two, .switch_title_three, .switch_title_four');*/
     /*var titles = $('.title_one, .title_two, .title_three, .title_four');*/
     /*var paragraphs = $('.paragraph_one, .paragraph_two, .paragraph_three, .paragraph_four');*/
 
@@ -44,14 +47,33 @@ $(function(){
         return randomFont;
     }
 
-    function switchStyle(font){
-        $('.title_one').css('font-family', font);
+    /*function switchTitleStyle(font){
+      if ($('.switch_title_one').data('clicked')) {
+          $('.title_one').css('font-family', font);
+          }    
+      else if ($('.switch_title_two').data('clicked')) {
+          $('.title_two').css('font-family', font);
+          }
+      else if ($('.switch_title_three').data('clicked')) {    
+          $('.title_three').css('font-family', font);
+          }
+      else {
+          $('.title_four').css('font-family', font);
+          }
+    } */
+
+    /*function switchParagraphStyle(font) {
+      $('.switch_paragraph_one').click(function() {
         $('.paragraph_one').css('font-family', font);
-        $('.title_two').css('font-family', font);
+      });
+      $('.switch_paragraph_two').click(function() {
         $('.paragraph_two').css('font-family', font);
-        $('.title_three').css('font-family', font);
+      });
+      $('.switch_paragraph_three').click(function() {
         $('.paragraph_three').css('font-family', font);
-        $('.title_four').css('font-family', font);
+      });
+      $('.switch_paragraph_four').click(function() {
         $('.paragraph_four').css('font-family', font);
-    }
+      });
+    }*/
 });
