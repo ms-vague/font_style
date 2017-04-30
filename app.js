@@ -23,10 +23,7 @@ $(function(){
             }
         }
     } 
-     $('.switch_title_one, .switch_title_two, .switch_title_three, .switch_title_four').click(function() { 
-        $(this).data('clicked', true);
-        WebFont.load(makeWebFontConfig());
-        });
+    WebFont.load(makeWebFontConfig());
     });
 
     function getRandomFont(fontArray) {
