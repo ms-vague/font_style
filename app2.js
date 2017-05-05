@@ -7,12 +7,16 @@ var pageElement = $('.pages');
    // variable to hold pageTemplate //
 
 var pagesTemplate = (
-       "<div class='page'>" +
-         "<h1>" +
-         "</h1>" +
-         "<p>" + 
-         "</p>" +
-       "</div>"
+      "<div class='page_container'>" +
+        "<div class='page_heading'>" +
+          "<h1 class='on'>" +
+          "</h1>" +
+        "</div>" +
+        "<div class='page_paragraph'>" +
+          "<p class='on'>" +
+          "</p>" +
+        "</div>" +
+      "</div>"
    );
 
    // global state object //
@@ -51,18 +55,21 @@ function renderPages(state, pageElement, pageDataAttr, font) {
    pageElement.html(pagesHTML);
 }
 
-addPage('this is heading', 'paragraph content', 0);
-addPage('more content for heading', 'this is additional content for paragraph', 1);
+addPage('Heading', 'Paragraph', 0);
 
    // event handling //
 
-$(function() {
- $('.button_h').click(function(font) {
-   //alert('test');
-   $('h1:first').addClass('.change_font').text('Something.');
- });
- $('.button_p').click(function(font) {
-   //alert('test');
-   $('p:first').addClass('.change_font').text('Something else.');
- });
+$('h1').on('font:change', function(event) {
+  var headingStyle = $(this);
+  if (headingStyle.is('.on')) {
+    headingStyle.removeClass('on').addClass('off');
+  } else {
+    headingStyle.removeClass('off').addClass('on'); 
+  }
 });
+
+$('.button_h').click(function() {
+  var heading = $(this).closest('.pages');
+  heading.find('h1').trigger('font:change');
+});
+
