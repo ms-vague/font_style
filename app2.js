@@ -7,16 +7,14 @@ var pageElement = $('.pages');
    // variable to hold pageTemplate //
 
 var pagesTemplate = (
-      "<div class='page_container'>" +
-        "<div class='page_heading'>" +
-          "<h1 class='on'>" +
-          "</h1>" +
-        "</div>" +
-        "<div class='page_paragraph'>" +
-          "<p class='on'>" +
-          "</p>" +
-        "</div>" +
-      "</div>"
+        "<div class='page_container'>" +
+          "<button class='button_h'>Change heading</button>" +
+            "<h1 class='heading on'>" +
+            "</h1>" +
+          "<button class='button_p'>Change paragraph</button>" +
+            "<p class='paragraph on'>" +
+            "</p>" +
+        "</div>" 
    );
 
    // global state object //
@@ -57,19 +55,42 @@ function renderPages(state, pageElement, pageDataAttr, font) {
 
 addPage('Heading', 'Paragraph', 0);
 
-   // event handling //
+   // custom event handling //
 
-$('h1').on('font:change', function(event) {
-  var headingStyle = $(this);
-  if (headingStyle.is('.on')) {
-    headingStyle.removeClass('on').addClass('off');
+   // heading class toggle //
+
+$('.pages').on('heading:toggle', '.heading', function(event) {
+  var heading = $(this);
+  if (heading.is('.on')) {
+    heading.removeClass('on').addClass('off');
   } else {
-    headingStyle.removeClass('off').addClass('on'); 
+    heading.removeClass('off').addClass('on');
   }
 });
 
-$('.button_h').click(function() {
-  var heading = $(this).closest('.pages');
-  heading.find('h1').trigger('font:change');
+$('.pages').on('click', '.button_h', function(event) {
+  event.preventDefault();
+  var container = $(this).closest('.page_container');
+  container.find('.heading').trigger('heading:toggle', {
+    $element:container.find('.heading')
+  });
 });
 
+  // paragraph class toggle //
+
+  $('.pages').on('heading:toggle', '.paragraph', function(event) {
+  var paragraph = $(this);
+  if (paragraph.is('.on')) {
+    paragraph.removeClass('on').addClass('off');
+  } else {
+    paragraph.removeClass('off').addClass('on');
+  }
+});
+
+$('.pages').on('click', '.button_p', function(event) {
+  event.preventDefault();
+  var container = $(this).closest('.page_container');
+  container.find('.paragraph').trigger('heading:toggle', {
+    $element:container.find('.paragraph')
+  });
+});
