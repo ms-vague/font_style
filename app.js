@@ -16,7 +16,6 @@ function makeWebFontConfig() {
        },
        fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
            //console.log(familyName);
-           renderPages(state, pageElement, pageDataAttr, familyName);
        }
    }
 }
