@@ -59,38 +59,38 @@ addPage('Heading', 'Paragraph', 0);
 
    // heading class toggle //
 
-$('.pages').on('heading:toggle', '.heading', function(event) {
-  var heading = $(this);
-  if (heading.is('.on')) {
-    heading.removeClass('on').addClass('off');
-  } else {
-    heading.removeClass('off').addClass('on');
-  }
-});
+$(function() {
+  $('.pages').on('heading:toggle', '.heading', function(event) {
+    var heading = $(this);
+    if (heading.is('.on')) {
+      heading.removeClass('on').addClass('off');
+    } else {
+      heading.removeClass('off').addClass('on');
+    }
+  });
 
-$('.pages').on('click', '.button_h', function(event) {
-  event.preventDefault();
-  var container = $(this).closest('.page_container');
-  container.find('.heading').trigger('heading:toggle', {
-    $element:container.find('.heading')
+  $('.pages').on('click', '.button_h', function(event) {
+    event.preventDefault();
+    var container = $(this).closest('.page_container');
+    container.find('.heading').trigger('heading:toggle');
   });
 });
 
   // paragraph class toggle //
 
-  $('.pages').on('heading:toggle', '.paragraph', function(event) {
-  var paragraph = $(this);
-  if (paragraph.is('.on')) {
-    paragraph.removeClass('on').addClass('off');
-  } else {
-    paragraph.removeClass('off').addClass('on');
-  }
-});
+$(function() {
+    $('.pages').on('heading:toggle', '.paragraph', function(event) {
+    var paragraph = $(this);
+    if (paragraph.is('.on')) {
+      paragraph.removeClass('on').addClass('off');
+    } else {
+      paragraph.removeClass('off').addClass('on');
+    }
+  });
 
-$('.pages').on('click', '.button_p', function(event) {
-  event.preventDefault();
-  var container = $(this).closest('.page_container');
-  container.find('.paragraph').trigger('heading:toggle', {
-    $element:container.find('.paragraph')
+  $('.pages').on('click', '.button_p', function(event) {
+    event.preventDefault();
+    var container = $(this).closest('.page_container');
+    container.find('.paragraph').trigger('heading:toggle');
   });
 });
