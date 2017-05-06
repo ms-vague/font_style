@@ -3,32 +3,21 @@
 }
 
 header {
-	font-family: serif, sans-serif;
-	font-size: xx-large;
+	font-family: georgia;
+	font-size: 300%;
 	text-align: center;
 	padding: 50px;
 }
 
-.font_pair_one, .font_pair_two, .font_pair_three, .font_pair_four {
-	display: inline-block;
-	margin: 25px 125px 25px 150px; /* top right bottom left   */
-	text-align: center;
-	border: 3px solid black;
-	border-radius: 15px;
+button {
+	padding: 6px 12px;
+	border-radius: 4px;
+	outline: 0;
+}
+
+.pages {
 	padding: 15px;
 }
-
-/* h1 {
-	width: 100px;
-	height: 100px;
-	background-color: purple;
-}
-
-.off {
-	width: 100px;
-	height: 100px;
-	background-color: white;
-} */
 
 /*
 
