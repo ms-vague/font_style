@@ -4,26 +4,24 @@
 }
 
 header {
-	font-family: serif, sans-serif;
-	font-size: xx-large;
+	font-family: georgia;
+	font-size: 300%;
 	text-align: center;
 	padding: 50px;
 }
 
+button {
+	padding: 6px 12px;
+	border-radius: 4px;
+	outline: 0;
+}
 
-/*
-.font_pair_one, .font_pair_two, .font_pair_three, .font_pair_four {
-	display: inline-block;
-	margin: 25px 125px 25px 150px; /* top right bottom left   
-	border: 3px solid black;
-	border-radius: 15px;
+.pages {
 	padding: 15px;
 }
 
-
+/*
 
 add responsive design CSS elements here
-
-
 
 */
