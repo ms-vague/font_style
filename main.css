@@ -15,8 +15,8 @@ button {
 	outline: 0;
 }
 
-.pages {
-	padding: 15px;
+.pages, .page_container {
+	padding: 10px;
 }
 
 /*
