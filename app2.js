@@ -15,6 +15,7 @@ var pagesTemplate = (
           "<button class='button_p'>Change paragraph</button>" +
             "<p class='paragraph on'>" +
             "</p>" +
+            "<button class='delete'>Delete page</button>" +
         "</div>" 
    );
 
@@ -64,6 +65,13 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
+function handlePageDeletes(state, page, pageIndex) {
+  $('.delete').click(function() {
+    deletePage(state, pageIndex);
+    renderPages(state, pageElement, pageDataAttr);
+  });
+}
+
 addPage({
      heading: "heading name",
      paragraph: "paragraph",
@@ -78,21 +86,27 @@ addPage({
      headingFont: 'Garamond',
      paragraphFont: 'Monospace'
    }, 1);
-addPage({
+/*addPage({
      heading: "OB",
      paragraph: "Back on June 10th",
      id: 0,
      headingFont: 'Times New Roman',
      paragraphFont: 'Georgia'
-   }, 2);
-updatePage(state, 0, {heading: 'new heading'});
-//deletePage(state, 0);
+   }, 2); */
 renderPages(state, pageElement, pageDataAttr);
+//updatePage(state, 0, {heading: 'new heading'});
+//deletePage(state, 0);
+handlePageDeletes(state, {heading: "heading name",
+                          paragraph: "paragraph",
+                          id: 0,
+                          headingFont: 'Monospace',
+                          paragraphFont: 'Verdana'}, 0);
 
    // custom event handling //
 
    // heading class toggle //
 
+$(function() {
   $('.pages').on('heading:toggle', '.heading', function(event) {
     var heading = $(this);
     if (heading.is('.on')) {
@@ -122,3 +136,4 @@ renderPages(state, pageElement, pageDataAttr);
     var container = $(this).closest('.page_container');
     container.find('.paragraph').trigger('heading:toggle');
   });
+});
