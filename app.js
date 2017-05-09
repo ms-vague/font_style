@@ -10,20 +10,19 @@ $.getJSON(googleFontUrl, function(data) {
    } 
 
 function makeWebFontConfig() { 
-   return {
+   return object =  {
        google: {
            families: getRandomFont(fontsArray)   // one random font array 
        },
        fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
-           //console.log(familyName);
-           renderPages(state, pageElement, pageDataAttr, familyName);
+          //console.log(familyName);
        }
    }
 }
 WebFont.load(makeWebFontConfig());
+//console.log(object.google.families[0]);
 
 function getRandomFont(fontArray) {
-   //console.log(fontArray);
    var min = 1;
    var max = fontArray.length;
    var randomFont = [];

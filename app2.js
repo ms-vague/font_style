@@ -1,3 +1,4 @@
+
 var pageDataAttr = 'data_id';  
 
 var pageElement = $('.pages');
@@ -23,24 +24,34 @@ var state = {
    pages: []    
 };
 
-function addPage(heading, paragraph, id) {
-   state.pages.push({
-     heading: heading,
-     paragraph: paragraph,
-     id: id
-   });
+function addPage(spec) {
+   state.pages.push(spec);
 }
 
 function getPage(state, pageIndex) {
    return state.pages[pageIndex];
 }
 
+function updatePage(state, pageIndex, newSpecs) {
+   Object.keys(newSpecs).forEach(function(spec) {
+    state.pages[pageIndex][spec] = newSpecs[spec];
+   });
+};
+
+function deletePage(state, pageIndex) {
+  state.pages.splice(pageIndex, 1);
+};
+
    // DOM manipulation //
 
 function renderPage(page, pageIndex, pageTemplate, pageDataAttr) {   /* function renders the page element on the DOM */
    var element = $(pageTemplate);
-   element.find('h1').text(page.heading);
-   element.find('p').text(page.paragraph);
+   element.find('h1')
+    .text(page.heading)
+    .css('font-family', page.headingFont);
+   element.find('p')
+    .text(page.paragraph)
+    .css('font-family', page.paragraphFont);
    element.attr(pageDataAttr, pageIndex);
    return element;
 }
@@ -53,20 +64,41 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
-addPage('Heading', 'Paragraph', 0);
+addPage({
+     heading: "heading name",
+     paragraph: "paragraph",
+     id: 0,
+     headingFont: 'Monospace',
+     paragraphFont: 'Verdana'
+   }, 0);
+addPage({
+     heading: "Cavafy",
+     paragraph: "Blah blah blah in Greek",
+     id: 0,
+     headingFont: 'Garamond',
+     paragraphFont: 'Monospace'
+   }, 1);
+addPage({
+     heading: "OB",
+     paragraph: "Back on June 10th",
+     id: 0,
+     headingFont: 'Times New Roman',
+     paragraphFont: 'Georgia'
+   }, 2);
+updatePage(state, 0, {heading: 'new heading'});
+//deletePage(state, 0);
 renderPages(state, pageElement, pageDataAttr);
 
    // custom event handling //
 
    // heading class toggle //
 
-$(function() {
   $('.pages').on('heading:toggle', '.heading', function(event) {
     var heading = $(this);
     if (heading.is('.on')) {
-      heading.removeClass('on').addClass('off').css('font-family', 'new courier');
+      heading.removeClass('on').addClass('off');
     } else {
-      heading.removeClass('off').addClass('on').css('font-family', 'garamond');
+      heading.removeClass('off').addClass('on');
     }
   });
 
@@ -77,12 +109,12 @@ $(function() {
 
   // paragraph class toggle //
 
-    $('.pages').on('heading:toggle', '.paragraph', function(event) {
+  $('.pages').on('heading:toggle', '.paragraph', function(event) {
     var paragraph = $(this);
     if (paragraph.is('.on')) {
-      paragraph.removeClass('on').addClass('off').css('font-family', 'arial');
+      paragraph.removeClass('on').addClass('off');
     } else {
-      paragraph.removeClass('off').addClass('on').css('font-family', 'verdana');
+      paragraph.removeClass('off').addClass('on');
     }
   });
 
@@ -90,4 +122,3 @@ $(function() {
     var container = $(this).closest('.page_container');
     container.find('.paragraph').trigger('heading:toggle');
   });
-});
