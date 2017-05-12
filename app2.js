@@ -19,6 +19,8 @@ var pagesTemplate = (
         "</div>" 
    );
 
+var removeIdentifier = $('.delete');
+
    // global state object //
 
 var state = {
@@ -65,8 +67,9 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
-function handlePageDeletes(state, page, pageIndex) {
-  $('.delete').click(function() {
+function handlePageDeletes(removeIdentifier, pageDataAttr, pageElement, state) {
+  $('.pages').on('click', removeIdentifier, function(event) {
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
     deletePage(state, pageIndex);
     renderPages(state, pageElement, pageDataAttr);
   });
@@ -78,29 +81,32 @@ addPage({
      id: 0,
      headingFont: 'Monospace',
      paragraphFont: 'Verdana'
-   }, 0);
+   });
 addPage({
      heading: "Cavafy",
      paragraph: "Blah blah blah in Greek",
-     id: 0,
+     id: 1,
      headingFont: 'Garamond',
      paragraphFont: 'Monospace'
-   }, 1);
-/*addPage({
+   });
+addPage({
      heading: "OB",
      paragraph: "Back on June 10th",
      id: 0,
      headingFont: 'Times New Roman',
      paragraphFont: 'Georgia'
-   }, 2); */
+   });
 renderPages(state, pageElement, pageDataAttr);
 //updatePage(state, 0, {heading: 'new heading'});
 //deletePage(state, 0);
-handlePageDeletes(state, {heading: "heading name",
-                          paragraph: "paragraph",
-                          id: 0,
-                          headingFont: 'Monospace',
-                          paragraphFont: 'Verdana'}, 0);
+handlePageDeletes(removeIdentifier, pageDataAttr, pageElement, state);   
+/*handlePageDeletes(state, {
+     heading: "Cavafy",
+     paragraph: "Blah blah blah in Greek",
+     id: 1,
+     headingFont: 'Garamond',
+     paragraphFont: 'Monospace'
+   }, 1, 1);*/
 
    // custom event handling //
 
