@@ -15,8 +15,11 @@ var pagesTemplate = (
           "<button class='button_p'>Change paragraph</button>" +
             "<p class='paragraph on'>" +
             "</p>" +
+            "<button class='delete'>Delete page</button>" +
         "</div>" 
    );
+
+var removeIdentifier = $('.delete');
 
    // global state object //
 
@@ -64,35 +67,52 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
+function handlePageDeletes(removeIdentifier, pageDataAttr, pageElement, state) {
+  $('.pages').on('click', removeIdentifier, function(event) {
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    deletePage(state, pageIndex);
+    renderPages(state, pageElement, pageDataAttr);
+  });
+}
+
 addPage({
      heading: "heading name",
      paragraph: "paragraph",
      id: 0,
      headingFont: 'Monospace',
      paragraphFont: 'Verdana'
-   }, 0);
+   });
 addPage({
      heading: "Cavafy",
      paragraph: "Blah blah blah in Greek",
-     id: 0,
+     id: 1,
      headingFont: 'Garamond',
      paragraphFont: 'Monospace'
-   }, 1);
+   });
 addPage({
      heading: "OB",
      paragraph: "Back on June 10th",
      id: 0,
      headingFont: 'Times New Roman',
      paragraphFont: 'Georgia'
-   }, 2);
-updatePage(state, 0, {heading: 'new heading'});
-//deletePage(state, 0);
+   });
 renderPages(state, pageElement, pageDataAttr);
+//updatePage(state, 0, {heading: 'new heading'});
+//deletePage(state, 0);
+handlePageDeletes(removeIdentifier, pageDataAttr, pageElement, state);   
+/*handlePageDeletes(state, {
+     heading: "Cavafy",
+     paragraph: "Blah blah blah in Greek",
+     id: 1,
+     headingFont: 'Garamond',
+     paragraphFont: 'Monospace'
+   }, 1, 1);*/
 
    // custom event handling //
 
    // heading class toggle //
 
+$(function() {
   $('.pages').on('heading:toggle', '.heading', function(event) {
     var heading = $(this);
     if (heading.is('.on')) {
@@ -122,3 +142,4 @@ renderPages(state, pageElement, pageDataAttr);
     var container = $(this).closest('.page_container');
     container.find('.paragraph').trigger('heading:toggle');
   });
+});
