@@ -4,7 +4,7 @@
 
 header {
 	font-family: georgia;
-	font-size: 300%;
+	font-size: 200%;
 	text-align: center;
 	padding: 50px;
 }
@@ -13,10 +13,24 @@ button {
 	padding: 6px 12px;
 	border-radius: 4px;
 	outline: 0;
+	margin: auto;
+  	display: block;
 }
 
-.pages, .page_container {
-	padding: 10px;
+.pages {
+  	margin: 10px;
+  	padding: 5px;
+  	text-align: center;
+}
+
+textarea {
+	width: 400px;
+	height: 200px;
+	text-align: center;
+	padding-right: 7px;
+	padding-left: 7px;
+	outline-width: 0;
+	border-radius: 5px;
 }
 
 /*

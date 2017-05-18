@@ -9,17 +9,21 @@ var pageElement = $('.pages');
 
 var pagesTemplate = (
         "<div class='page_container'>" +
-          "<button class='button_h'>Change heading</button>" +
+          "<button class='button_h'>Heading font</button>" +
             "<h1 class='heading on'>" +
             "</h1>" +
-          "<button class='button_p'>Change paragraph</button>" +
+            "<span><input class='hidden heading-changer' type='text' placeholder='Change heading' /></span>" +
+          "<button class='button_p'>Paragraph font</button>" +
             "<p class='paragraph on'>" +
             "</p>" +
-            "<button class='delete'>Delete page</button>" +
+          "<button class='delete'>" +
+              "<span>Delete page</span>" +
+          "</button>" +
+          "<button class ='update'>" +
+            "<span>Update page</span>" +
+          "</button>" +
         "</div>" 
    );
-
-//var removeIdentifier = $('.delete');
 
    // global state object //
 
@@ -67,9 +71,28 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
+/*function handleFontChange(pageDataAttr, pageElement, state) {
+  $('.pages').on('click', '.button_h', function(event) {
+    event.preventDefault();
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    updatePage(state, pageIndex, {headingFont: 'Times New Roman'});
+    renderPages(state, pageElement, pageDataAttr);
+  });
+}*/
+
+function handlePageUpdates(pageDataAttr, pageElement, state) {
+  $('.pages').on('keyup', '.hidden', function(event) {
+    event.preventDefault();
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    if (event.which === 13) {
+      updatePage(state, pageIndex, {heading: 'Them Crooked Vultures'});
+      renderPages(state, pageElement, pageDataAttr);
+    }
+  });
+}
+
 function handlePageDeletes(pageDataAttr, pageElement, state) {
   $('.pages').on('click', '.delete', function(event) {
-    console.log($(event.target));
     var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
     deletePage(state, pageIndex);
     renderPages(state, pageElement, pageDataAttr);
@@ -81,27 +104,18 @@ addPage({
      paragraph: "paragraph",
      headingFont: 'Monospace',
      paragraphFont: 'Verdana'
-   });
-addPage({
-     heading: "Cavafy",
-     paragraph: "Blah blah blah in Greek",
-     headingFont: 'Garamond',
-     paragraphFont: 'Monospace'
-   });
-addPage({
-     heading: "OB",
-     paragraph: "Return June 10th",
-     headingFont: 'Times New Roman',
-     paragraphFont: 'Georgia'
-   });
+});
+
 renderPages(state, pageElement, pageDataAttr);
-//updatePage(state, 0, {heading: 'new heading'});
+/*updatePage(state, 0, {heading: 'New heading'});
+renderPages(state, pageElement, pageDataAttr);*/
+/*handleFontChange(pageDataAttr, pageElement, state)*/
+handlePageUpdates(pageDataAttr, pageElement, state);
 handlePageDeletes(pageDataAttr, pageElement, state);   
 
    // custom event handling //
 
    // heading class toggle //
-
 $(function() {
   $('.pages').on('heading:toggle', '.heading', function(event) {
     var heading = $(this);
@@ -131,5 +145,5 @@ $(function() {
   $('.pages').on('click', '.button_p', function() {
     var container = $(this).closest('.page_container');
     container.find('.paragraph').trigger('heading:toggle');
-  });
+  });  
 });
