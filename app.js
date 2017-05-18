@@ -14,15 +14,16 @@ function makeWebFontConfig() {
        google: {
            families: getRandomFont(fontsArray)   // one random font array 
        },
-       fontloading: function(familyName, fvd) {   // takes array and breaks it up into separate font strings
-           //console.log(familyName);
+       fontloading: function(familyName, fvd) {
+       //console.log(familyName);   // takes array and breaks it up into separate font strings
        }
    }
 }
 WebFont.load(makeWebFontConfig());
+var stringFont = getRandomFont(fontsArray).toString();
+//console.log(stringFont);
 
 function getRandomFont(fontArray) {
-   //console.log(fontArray);
    var min = 1;
    var max = fontArray.length;
    var randomFont = [];
@@ -30,4 +31,173 @@ function getRandomFont(fontArray) {
    //console.log(randomFont);
    return randomFont;
 }
+
+var pageDataAttr = 'data_id';  
+
+var pageElement = $('.pages');
+   //console.log($('.pages'));
+   //console.log(pageElement);
+
+   // variable to hold pageTemplate //
+
+var pagesTemplate = (
+        "<div class='page_container'>" +
+          "<button class='button_h'>Heading font</button>" +
+            "<h1 class='heading on'>" +
+            "</h1>" +
+            "<span><textarea class='hidden heading-changer' type='text' placeholder='Change heading'></textarea></span>" +
+          "<button class='button_p'>Paragraph font</button>" +
+            "<p class='paragraph on'>" +
+            "</p>" +
+            "<span><textarea class='hidden paragraph-changer' type='text' placeholder='Change paragraph'></textarea></span>" +
+          "<button class='delete'>" +
+              "<span>Delete page</span>" +
+          "</button>" +
+          "<button class ='update'>" +
+            "<span>Update page</span>" +
+          "</button>" +
+        "</div>" 
+   );
+
+var input = $('.heading-changer');
+
+   // global state object //
+
+var state = {
+   pages: []    
+};
+
+function addPage(spec) {
+   state.pages.push(spec);
+}
+
+function getPage(state, pageIndex) {
+   return state.pages[pageIndex];
+}
+
+function updatePage(state, pageIndex, newSpecs) {
+   Object.keys(newSpecs).forEach(function(spec) {
+    state.pages[pageIndex][spec] = newSpecs[spec];
+   });
+};
+
+function deletePage(state, pageIndex) {
+  state.pages.splice(pageIndex, 1);
+};
+
+   // DOM manipulation //
+
+function renderPage(page, pageIndex, pageTemplate, pageDataAttr) {   /* function renders the page element on the DOM */
+   var element = $(pageTemplate);
+   element.find('h1')
+    .text(page.heading)
+    .css('font-family', page.headingFont);
+   element.find('p')
+    .text(page.paragraph)
+    .css('font-family', page.paragraphFont);
+   element.attr(pageDataAttr, pageIndex);
+   return element;
+}
+
+function renderPages(state, pageElement, pageDataAttr) {
+   var pagesHTML = state.pages.map(
+     function(page, pageIndex) {
+     return renderPage(page, pageIndex, pagesTemplate, pageDataAttr); 
+   });
+   pageElement.html(pagesHTML);
+}
+
+function handleAddPage(spec) {
+  addPage(spec);
+  renderPages(state, pageElement, pageDataAttr);
+}
+
+function handleFontChange(pageDataAttr, pageElement, state) {
+  $('.pages').on('click', '.button_h', function(event) {
+    event.preventDefault();
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    updatePage(state, pageIndex, {headingFont: 'Georgia'});
+    renderPages(state, pageElement, pageDataAttr);
+  });
+}
+
+function handleHeadingUpdates(pageDataAttr, pageElement, state) {
+  $('.pages').on('keyup', '.heading-changer', function(event) {
+    event.preventDefault();
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    //console.log(($(this).val()));
+    if (event.which === 13) { 
+      updatePage(state, pageIndex, { heading: $(this).val() });
+      renderPages(state, pageElement, pageDataAttr);
+    }
+  });
+}
+
+function handleParagraphUpdates(pageDataAttr, pageElement, state) {
+  $('.pages').on('keyup', '.paragraph-changer', function(event) {
+    event.preventDefault();
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    //console.log(($(this).val()));
+    if (event.which === 13) { 
+      updatePage(state, pageIndex, { paragraph: $(this).val() });
+      renderPages(state, pageElement, pageDataAttr);
+    }
+  });
+}
+
+function handlePageDeletes(pageDataAttr, pageElement, state) {
+  $('.pages').on('click', '.delete', function(event) {
+    var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
+    deletePage(state, pageIndex);
+    renderPages(state, pageElement, pageDataAttr);
+  });
+}
+
+renderPages(state, pageElement, pageDataAttr);
+handleAddPage({
+              heading: 'Lorem Ipsum', 
+              paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec iaculis urna...',
+              headingFont: 'Monospace',
+              paragraphFont: 'Verdana'
+              });
+handleFontChange(pageDataAttr, pageElement, state);
+handleHeadingUpdates(pageDataAttr, pageElement, state);
+handleParagraphUpdates(pageDataAttr, pageElement, state);
+handlePageDeletes(pageDataAttr, pageElement, state);   
+
+   // custom event handling //
+
+   // heading class toggle //
+/*$(function() {
+  $('.pages').on('heading:toggle', '.heading', function(event) {
+    var heading = $(this);
+    if (heading.is('.on')) {
+      heading.removeClass('on').addClass('off');
+    } else {
+      heading.removeClass('off').addClass('on');
+    }
+  });
+
+  $('.pages').on('click', '.button_h', function() {
+    var container = $(this).closest('.page_container');
+    container.find('.heading').trigger('heading:toggle');
+  });
+
+  // paragraph class toggle //
+
+  $('.pages').on('heading:toggle', '.paragraph', function(event) {
+    var paragraph = $(this);
+    if (paragraph.is('.on')) {
+      paragraph.removeClass('on').addClass('off');
+    } else {
+      paragraph.removeClass('off').addClass('on');
+    }
+  });
+
+  $('.pages').on('click', '.button_p', function() {
+    var container = $(this).closest('.page_container');
+    container.find('.paragraph').trigger('heading:toggle');
+  });  
+});*/
+//console.log(state.pages);
 });
