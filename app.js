@@ -1,5 +1,9 @@
 var googleFontUrl = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBxzFarVQQ7DZrN8SDz4wMuikwd4Abx51w';
 
+var state = {
+   pages: []  
+};
+
 $.getJSON(googleFontUrl, function(data) {
    var getArray = data.items;
    var fontsArray = [];
@@ -12,16 +16,14 @@ $.getJSON(googleFontUrl, function(data) {
 function makeWebFontConfig() { 
    return {
        google: {
-           families: getRandomFont(fontsArray)   // one random font array 
+           families: getRandomFont(fontsArray)
        },
        fontloading: function(familyName, fvd) {
-       //console.log(familyName);   // takes array and breaks it up into separate font strings
+       //console.log(familyName);  
        }
    }
 }
 WebFont.load(makeWebFontConfig());
-var stringFont = getRandomFont(fontsArray).toString();
-//console.log(stringFont);
 
 function getRandomFont(fontArray) {
    var min = 1;
@@ -53,19 +55,10 @@ var pagesTemplate = (
           "<button class='delete'>" +
               "<span>Delete page</span>" +
           "</button>" +
-          "<button class ='update'>" +
-            "<span>Update page</span>" +
-          "</button>" +
         "</div>" 
    );
 
-var input = $('.heading-changer');
-
    // global state object //
-
-var state = {
-   pages: []    
-};
 
 function addPage(spec) {
    state.pages.push(spec);
@@ -107,16 +100,20 @@ function renderPages(state, pageElement, pageDataAttr) {
    pageElement.html(pagesHTML);
 }
 
+/* show Ben */
+
 function handleAddPage(spec) {
   addPage(spec);
   renderPages(state, pageElement, pageDataAttr);
 }
 
-function handleFontChange(pageDataAttr, pageElement, state) {
+  /* show Ben */
+
+function handleFontChange(pageDataAttr, pageElement, state, font) {
   $('.pages').on('click', '.button_h', function(event) {
     event.preventDefault();
     var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
-    updatePage(state, pageIndex, {headingFont: 'Georgia'});
+    updatePage(state, pageIndex, { headingFont: font }, {paragraphFont: font});
     renderPages(state, pageElement, pageDataAttr);
   });
 }
@@ -154,16 +151,17 @@ function handlePageDeletes(pageDataAttr, pageElement, state) {
 }
 
 renderPages(state, pageElement, pageDataAttr);
-handleAddPage({
-              heading: 'Lorem Ipsum', 
-              paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec iaculis urna...',
-              headingFont: 'Monospace',
-              paragraphFont: 'Verdana'
-              });
+handleAddPage({});
 handleFontChange(pageDataAttr, pageElement, state);
 handleHeadingUpdates(pageDataAttr, pageElement, state);
 handleParagraphUpdates(pageDataAttr, pageElement, state);
 handlePageDeletes(pageDataAttr, pageElement, state);   
+
+$(function() {
+  $('.add').on('click', function() {
+    handleAddPage({});
+  });
+});
 
    // custom event handling //
 
