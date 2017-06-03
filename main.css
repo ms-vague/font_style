@@ -3,7 +3,6 @@
 }
 
 header {
-	font-family: georgia;
 	font-size: 200%;
 	text-align: center;
 	padding: 50px;
@@ -17,6 +16,10 @@ button {
   	display: block;
 }
 
+.page_container {
+	padding: 5px;
+}
+
 .pages {
   	margin: 10px;
   	padding: 5px;
@@ -24,8 +27,8 @@ button {
 }
 
 textarea {
-	width: 400px;
-	height: 200px;
+	width: 200px;
+	height: 100px;
 	text-align: center;
 	padding-right: 7px;
 	padding-left: 7px;
@@ -33,8 +36,29 @@ textarea {
 	border-radius: 5px;
 }
 
-/*
+.post-title {
+  font-family: sans-serif;
+}
 
-add responsive design CSS elements here
+.no-js .post-title,
+.wf-active .post-title {
+  font-family: sans-serif;
+}
 
-*/
+@media screen and (max-width: 300px) {
+  .pages {
+    padding:  3em 0;
+  }
+	
+  aside {
+  	padding: 3em 0;
+  }	
+
+  h1, p {
+    font-size: 3em;
+  }
+
+  textarea {
+  	padding: 6em 0;
+  }
+}
