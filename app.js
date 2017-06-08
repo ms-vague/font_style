@@ -16,19 +16,18 @@ $.getJSON(googleFontUrl, function(data) {
        filesArray.push(getArray[i]['files']['regular']);
    } 
 
-  function makeWebFontConfig() {
+  function makeWebFontConfig(font) {
   //console.log(state.fonts); 
     return {
       google: {
-          families: [getRandomFont(state.fonts)]
+          families: [font]
         },
         fontloading: function(familyName, fvd) {     
-          console.log(familyName);
-          addLoadedFont(familyName);
+          //console.log(familyName);
+          markFontAsLoaded(familyName);
       }
     }
   } 
-  WebFont.load(makeWebFontConfig());
 
   function getRandomFont(fontArray) {
     //console.log(fontArray);
@@ -44,8 +43,6 @@ $.getJSON(googleFontUrl, function(data) {
   var pageDataAttr = 'data_id';  
 
   var pageElement = $('.pages');
-
-     // variable to hold pageTemplate //
 
   var pagesTemplate = (
           "<div class='page_container'>" +
@@ -81,10 +78,17 @@ $.getJSON(googleFontUrl, function(data) {
     state.pages.splice(pageIndex, 1);
   };
 
+  function markFontAsLoaded(familyName) {
+      state.loadedFonts.push(familyName);
+  }
+
      // DOM manipulation //
 
   function renderPage(page, pageIndex, pageTemplate, pageDataAttr) {   /* function renders the page element on the DOM */
      var element = $(pageTemplate);
+     //console.log(state);
+     WebFont.load(makeWebFontConfig(page.headingFont));
+     WebFont.load(makeWebFontConfig(page.paragraphFont));
      element.find('h1')
       .text(page.heading);
       renderHeadingFont(page, element.find('h1'));
@@ -93,10 +97,6 @@ $.getJSON(googleFontUrl, function(data) {
       renderParagraphFont(page, element.find('p'));
      element.attr(pageDataAttr, pageIndex);
      return element;
-  }
-
-  function addLoadedFont(familyName) {
-      state.loadedFonts.push(familyName);
   }
 
   function renderHeadingFont(page, element) {
@@ -146,25 +146,22 @@ $.getJSON(googleFontUrl, function(data) {
     });
   }
 
-  function handleHeadingFont(pageDataAttr, pageElement, state, font) {
+  function handleHeadingFont(pageDataAttr, pageElement, state) {
     $('.pages').on('click', '.button_h', function(event) {
       event.preventDefault();
       var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
-      WebFont.load(makeWebFontConfig());
-      console.log(state.loadedFonts);
-      updatePage(state, pageIndex, { headingFont: state.loadedFonts.splice(0, 818) }); 
+      updatePage(state, pageIndex, { headingFont: getRandomFont(state.fonts) });
+      console.log(state.pages);
       renderPages(state, pageElement, pageDataAttr);
     });
   }
-  
 
-  function handleParagraphFont(pageDataAttr, pageElement, state, font) {
+  function handleParagraphFont(pageDataAttr, pageElement, state) {
     $('.pages').on('click', '.button_p', function(event) {
       event.preventDefault();
       var pageIndex = parseInt($(this).closest('.page_container').attr(pageDataAttr));
-      WebFont.load(makeWebFontConfig());
-      console.log(state.loadedFonts);
-      updatePage(state, pageIndex, { paragraphFont: state.loadedFonts.splice(0, 818) });
+      updatePage(state, pageIndex, { paragraphFont: getRandomFont(state.fonts) });
+      console.log(state.pages);
       renderPages(state, pageElement, pageDataAttr);
     });
   }
@@ -178,7 +175,6 @@ $.getJSON(googleFontUrl, function(data) {
   }
 
   renderPages(state, pageElement, pageDataAttr);
-  //handleAddPage({}); 
   handleHeadingText(pageDataAttr, pageElement, state);
   handleParagraphText(pageDataAttr, pageElement, state);
   handleHeadingFont(pageDataAttr, pageElement, state);
@@ -188,7 +184,7 @@ $.getJSON(googleFontUrl, function(data) {
   $(function() {
     $('.add').fadeIn('slow')
       .on('click', function() {
-      handleAddPage({});
+      handleAddPage({headingFont: 'Roboto', paragraphFont: 'Roboto'});
     });
   });
 });  
